@@ -1,0 +1,416 @@
+openapi: 3.0.0
+info:
+  title: Flashcard API
+  description: >
+    <div>You can test different Flashcard API endpoints here.
+    </div>
+
+    <h3> Error Codes </h3> 
+    <table>
+      <thead>
+        <th>Resource</th>
+        <th>Error Code</th>
+        <th>Message</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>deck</td>
+        <td>DECK01</td>
+        <td>Title already exists</td>
+      </tr>
+      <tr>
+        <td>deck</td>
+        <td>DECK02</td>
+        <td>Title is required and should be string</td>
+      </tr>
+      <tr>
+        <td>card</td>
+        <td>CARD01</td>
+        <td>Qusestion is required and should be string</td>
+      </tr>
+      <tr>
+        <td>card</td>
+        <td>CARD01</td>
+        <td>Answer is required and should be string</td>
+      </tr>
+    </tbody>
+    </table>
+
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:5000/
+paths:
+  /api/{username}/{password}/deck/{title}:
+    description: End point to read and delete a deck.
+    get:
+      description: List of cards in a deck.
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: 'User 1'
+        - in: path
+          name: password
+          required: true
+          schema:
+            type: string
+            example: 'Pass 1'
+        - in: path
+          name: title
+          required: true
+          schema:
+            type: string
+            example: 'Title 1'
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                title: course object
+                type: array
+                items:
+                  properties:
+                    question:
+                      type: string
+                      example: 'ques 1'
+                    answer:
+                      type: string
+                      example: 'ans 1'
+                    
+        '500':
+          description: Internal Server Error
+        '404':
+          description: User or title not found
+        '401':
+          description: Invalid password
+
+   
+    delete:
+      description: Delete a deck
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: 'User 1'
+        - in: path
+          name: password
+          required: true
+          schema:
+            type: string
+            example: 'Pass 1'
+        - in: path
+          name: title
+          required: true
+          schema:
+            type: string
+            example: 'Title 1'
+      responses:
+        '200':
+          description: Successfully Deleted
+        '404':
+          description: User or title not found
+        '500':
+          description: Intenal Server Error
+        '401':
+          description: Invalid password
+
+  /api/{username}/{password}/deck:
+    description: End point to create deck. 
+    post:
+      description: Operation to create a deck.
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: 'User 1'
+        - in: path
+          name: password
+          required: true
+          schema:
+            type: string
+            example: 'Pass 1'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Title 1
+      responses:
+        '200':
+          description: Successfully Created
+        '401':
+          description: Invalid password
+        '404':
+          description: User not found
+        '500':
+          description: Internal Server Error
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+  /api/{username}/{password}/card/{title}/{question}:
+    description: Url to read, update and delete a card.
+    get:
+      description: Operation to read a card
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: 'User 1'
+        - in: path
+          name: password
+          required: true
+          schema:
+            type: string
+            example: 'Pass 1'
+        - in: path
+          name: title
+          required: true
+          schema:
+            type: string
+            example: 'Title 1'
+        - in: path
+          name: question
+          required: true
+          schema:
+            type: string
+            example: 'Ques 1'
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                title: student object
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: 'User 1'
+                  password:
+                    type: string
+                    example: 'pass 1'
+                  question:
+                    type: string
+                    example: 'ques 1'
+                  answer:
+                    type: string
+                    example: 'ans 1'
+        '500':
+          description: Internal server error
+        '404':
+          description: User, title or question not found
+        '401':
+          description: Invalid password
+    put:
+      description: Operation to update a card
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: 'User 1'
+        - in: path
+          name: password
+          required: true
+          schema:
+            type: string
+            example: 'Pass 1'
+        - in: path
+          name: title
+          required: true
+          schema:
+            type: string
+            example: 'Title 1'
+        - in: path
+          name: question
+          required: true
+          schema:
+            type: string
+            example: 'Ques 1'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  example: 'ques 1'
+                answer:
+                  type: string
+                  example: 'ans 1'
+      responses:
+        '200':
+          description: Successfully Created
+        '401':
+          description: Invalid password
+        '404':
+          description: User, title or question not found
+        '500':
+          description: Internal Server Error
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+    delete:
+      description: Operation to delete a card
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: 'User 1'
+        - in: path
+          name: password
+          required: true
+          schema:
+            type: string
+            example: 'Pass 1'
+        - in: path
+          name: title
+          required: true
+          schema:
+            type: string
+            example: 'Title 1'
+        - in: path
+          name: question
+          required: true
+          schema:
+            type: string
+            example: 'Ques 1'
+      responses:
+        '200':
+          description: Successfully Deleted
+        '500':
+          description: Internal Server Error
+        '404':
+          description: User, title or question not found
+        '401':
+          description: Invalid password
+
+  /api/{username}/{password}/card/{title}:
+    description: Url to create a card
+    post:
+      description: Operation to create a card
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: 'User 1'
+        - in: path
+          name: password
+          required: true
+          schema:
+            type: string
+            example: 'Pass 1'
+        - in: path
+          name: title
+          required: true
+          schema:
+            type: string
+            example: 'Title 1'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  example: 'ques 1'
+                answer:
+                  type: string
+                  example: 'ans 1'
+      responses:
+        '200':
+          description: Successfully Created
+        '401':
+          description: Invalid password
+        '404':
+          description: User or  title not found
+        '500':
+          description: Internal Server Error
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+
+  /api/{username}/{password}/score/{title}:
+    description: Url to get the score for a deck
+    get:
+      description: URL to get the score for a deck
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: 'User 1'
+        - in: path
+          name: password
+          required: true
+          schema:
+            type: string
+            example: 'Pass 1'
+        - in: path
+          name: title
+          required: true
+          schema:
+            type: string
+            example: 'Title 1'
+   
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  score:
+                    type: integer
+                    example: 10
+        '401':
+          description: Invalid password
+        '404':
+          description: User or  title not found
+        '500':
+          description: Internal Server Error

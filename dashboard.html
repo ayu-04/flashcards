@@ -1,0 +1,57 @@
+<!DOCTYPEhtml>
+<html>
+	<head>
+		<title>dashboard</title>
+	</head>
+	<body style="background-color:Lavender ;font-size:larger; border-radius: 100px;margin: 100px;border-style: hidden;">
+	<h1 align="center">Flashcards</h1>
+	<div style="width:80%;float:left">
+	<h2 align="center">Do it again</h2>
+	<br>
+	{%if do_it_again|length >0%}
+	{%for i in do_it_again%}
+	<p>
+	<a style="text-decoration:none;border-style:solid;border-color:LightBlue;color:Black;padding:30px;background-color:LightBlue; border-radius: 25px;"href="/{{username}}/flashcard/{{i.title}}/0">{{i.title}}</a>
+	&nbsp;&nbsp;recent score - {{i.rec_score}}&nbsp;&nbsp;last played - {{i.date_time}}
+	</p><br>
+	{%endfor%}
+	{%else%}
+	<p align="center">You haven't played anything yet</p>
+	{%endif%}
+	<br>
+	<h2 align="center">Try someting new</h2>
+	<br>
+	<p>
+	{%if try_smtg_new|length >0%}
+	{%for i in try_smtg_new%}
+	<a style="text-decoration:none;border-style:solid;border-color:LightPink;color:Black;padding:30px;background-color:LightPink; border-radius: 25px;"href="/{{username}}/flashcard/{{i.title}}/0">{{i.title}}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{%endfor%}
+	{%endif%}
+	</p>
+	</div>
+	<div style="width:20%;float:left">
+		<p>
+		<a style="text-decoration:none;color:Black;padding:30px;border-style:solid;border-color:Red;background-color:Red; border-radius: 25px;"href="/">Log out</a>
+		</p>
+		<br>
+		<p>
+		<a style="text-decoration:none;color:Black;padding:30px;border-style:solid;border-color:Plum;background-color:Plum; border-radius: 25px;"href="/{{username}}/create">create a deck</a>
+		</p>
+		<br>
+		<p>
+		<a style="text-decoration:none;color:Black;padding:30px;border-style:solid;border-color:Orchid;background-color:Orchid; border-radius: 25px;"href="/{{username}}/dele">delete decks</a>
+		</p>
+		<br>
+		<p>
+		<a style="text-decoration:none;color:Black;padding:30px;border-style:solid;border-color:MediumPurple;background-color:MediumPurple; border-radius: 25px;"href="/{{username}}/edit">edit a deck</a>
+		</p>		
+		<br>
+		<p>
+		<a style="text-decoration:none;color:Black;padding:30px;border-style:solid;border-color: MediumSlateBlue;background-color: MediumSlateBlue; border-radius: 25px;"href="/{{username}}/import">import a deck</a>
+		</p>
+		<br>
+		<p>
+		<a style="text-decoration:none;color:Black;padding:30px;border-style:solid;border-color: DarkOrchid;background-color: DarkOrchid; border-radius: 25px;"href="/{{username}}/export">export a deck</a>
+		</p>
+	</div>
+	</body>

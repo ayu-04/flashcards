@@ -1,0 +1,24 @@
+<!DOCTYPEhtml>
+<html>
+	<head>
+		<title>create</title>
+	</head>
+	<body style="background-color:Plum ;font-size:larger ; border-radius: 100px;margin: 100px;border-style: hidden;">
+	<div style="width:80%;float:left">
+	<h1 align="center">Create a card</h1>
+	<form method="POST">
+	<p>
+	Question&nbsp;&nbsp;<input type="text" name="question" required>
+	</p>
+	<p>
+	Answer&nbsp;&nbsp;<input type="text" name="answer" required>
+	</p>
+	<p>
+	<input style="border-style:solid;border-color:LightBlue;color:Black;padding:30px; background-color: LightBlue; margin-left: 50%; border-radius: 25px;"  type="submit" name="submit_button" value="Create">
+	</p>
+	</form>
+	</div>
+	<div style="width:20%;float:left">
+	<h2 style="border-style:solid;border-color:LightPink;color:Black;padding:30px;background-color:LightPink; border-radius: 25px;">Cards left - {{count}}</h2>
+	</div>
+	</body>

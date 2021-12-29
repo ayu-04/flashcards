@@ -1,0 +1,30 @@
+<!DOCTYPEhtml>
+<html>
+	<head>
+		<title>edit</title>
+	</head>
+	<body style="background-color:MediumPurple ;font-size:larger; border-radius: 100px;margin: 100px;border-style: hidden;">
+	<div style="width:80%;float:left">
+	<h1 align="center">Select the deck you want to edit</h1>
+	<br>
+	<p>
+	{%if cards|length >0%}
+	{%for i in cards%}
+	<a style="text-decoration:none;border-style:solid;border-color:LightBlue;color:Black;padding:30px;background-color:LightBlue; border-radius: 25px;"href="/{{i.username}}/deck_edit/{{i.title}}">{{i.title}}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{%endfor%}
+	{%else%}
+	<h2> You don't have any decks</h2>
+	{%endif%}
+	</p>
+	<br>
+	<p>
+	<a style="text-decoration:none;color:Black;padding:30px;border-style:solid;border-color:Lavender;background-color:Lavender; border-radius: 25px;"href="/{{username}}/dashboard">Go to dashboard</a>
+	</p>
+	</div>
+	<div style="width:20%;float:left">
+		<p>
+		<a style="text-decoration:none;color:Black;padding:30px;border-style:solid;border-color:Red;background-color:Red; border-radius: 25px;"href="/">Log out</a>
+		</p>
+		
+	</div>
+	</body>
